@@ -12,7 +12,7 @@ Furthermore a working nodejs installation is required.
 
 ## Installation
 
-1. Clone this repository to a location of your choosing.
+1. Download/extract or clone this repository to a location of your choosing.
 2. change into the cloned repo
 3. Execute `npm install`.
 
