@@ -13,7 +13,8 @@ Furthermore a working nodejs installation is required.
 ## Installation
 
 1. Clone this repository to a location of your choosing.
-2. Execute `npm install`.
+2. change into the cloned repo
+3. Execute `npm install`.
 
 Afterwards you can start the game and then start the dumper with `nodejs index.js`.
 
