@@ -1,7 +1,7 @@
 const WebSocket = require('ws');
 const fs = require('fs');
 
-const ws = new WebSocket('ws://localhost:8029/racers-ledger/');
+const ws = new WebSocket('ws://localhost:32325/racers-ledger/');
 
 global.salvaged = -1;
 global.destroyed = -1;
