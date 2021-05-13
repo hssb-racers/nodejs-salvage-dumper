@@ -22,6 +22,9 @@ ws.on('open', function open() {
 
 ws.on('message', function incoming(data) {
 	console.log(data);
+	if( data == "hello new client!"){
+		return;
+	}
 	try {
 		ev = JSON.parse(data);
 		console.log(ev);
