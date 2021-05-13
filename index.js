@@ -42,8 +42,8 @@ ws.on('message', function incoming(data) {
 			}
 		}
 
-		fs.writeFileSync('salvaged.txt', salvaged.toString());
-		fs.writeFileSync('destroyed.txt', destroyed.toString());
+		fs.writeFileSync('salvaged.txt', salvaged.toFixed(2));
+		fs.writeFileSync('destroyed.txt', destroyed.toFixed(2));
 	} catch (err){
 		console.error(err)
 	}
