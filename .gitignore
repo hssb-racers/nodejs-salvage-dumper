@@ -1,0 +1,6 @@
+# do not commit output data files
+salvaged.txt
+destroyed.txt
+
+# never accidentially commit node_modules
+node_modules/
