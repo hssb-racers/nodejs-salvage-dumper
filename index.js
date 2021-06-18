@@ -1,7 +1,16 @@
-const WebSocket = require('ws');
-const fs = require('fs');
+const os = require('os');
+const TextSourceType = os.platform() == "win32" ? 'GDIPlus' : 'Freetype2';
+const TestSourceSetter = 'SetText' + TextSourceType + 'Properties';
 
+const WebSocket = require('ws');
 const ws = new WebSocket('ws://localhost:32325/racers-ledger/');
+
+const OBSWebSocket = require('obs-websocket-js');
+const obs = new OBSWebSocket();
+obs.connect({
+	address: 'localhost:4444',
+	// password: '$up3rSecretP@ssw0rd'
+});
 
 global.salvaged = -1;
 global.destroyed = -1;
@@ -40,10 +49,23 @@ ws.on('message', function incoming(data) {
 			} else {
 				global.salvaged += ev.value;
 			}
+
 		}
 
-		fs.writeFileSync('salvaged.txt', salvaged.toFixed(2));
-		fs.writeFileSync('destroyed.txt', destroyed.toFixed(2));
+		// possible fields to send are documented in
+		// https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#settextgdiplusproperties
+		// https://github.com/Palakis/obs-websocket/blob/4.x-current/docs/generated/protocol.md#settextfreetype2properties
+		//
+		// Beware: to make it run both on linux and windows we have to choose the text source type (GDI+ under win32, FT2 under linux)
+		// This changes what fields are supported besides the source name and (the for us mandatory) text.
+		obs.send(TestSourceSetter, {
+			'source': "salvaged",
+			'text' : salvaged.toFixed(2)
+		});
+		obs.send(TestSourceSetter, {
+			'source': "destroyed",
+			'text' : destroyed.toFixed(2)
+		});
 	} catch (err){
 		console.error(err)
 	}
